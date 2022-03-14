@@ -8,6 +8,7 @@ import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.io.resource.Resource;
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.CharsetUtil;
+import lombok.extern.java.Log;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,6 +29,7 @@ import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+@Log
 // @SpringBootTest
 class DemoApplicationTests {
 
@@ -74,11 +76,16 @@ class DemoApplicationTests {
 
 			context.evaluateString(scope, sb.toString(), null, 1, null);
 
-			Object result = context.evaluateString(scope, "select();", null, 1, null);
-			System.out.println(Context.toString(result));
+			Object result = null;
+	
+			result = context.evaluateString(scope, "selectArg([1,2]);", null, 1, null);
+			log.info(Context.toString(result));
 
-			// result = context.evaluateString(scope, "test();", null, 1, null);
-			// System.out.println(Context.toString(result));
+			result = context.evaluateString(scope, "selectArg();", null, 1, null);
+			log.info(Context.toString(result));
+
+			result = context.evaluateString(scope, "select();", null, 1, null);
+			log.info(Context.toString(result));
 
 		} catch (Exception e) {
 			e.printStackTrace();
