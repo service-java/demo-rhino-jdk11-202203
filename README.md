@@ -1,5 +1,9 @@
 # README
 
+- 性能问题
+
+![](https://luo0412.oss-cn-hangzhou.aliyuncs.com/1647226024589.png)
+
 # 常见问题
 
 - 数组的正确转换 @fix

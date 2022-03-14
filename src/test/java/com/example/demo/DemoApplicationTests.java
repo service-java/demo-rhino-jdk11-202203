@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
 
 import cn.hutool.core.collection.ListUtil;
+import cn.hutool.core.date.StopWatch;
 import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.io.resource.Resource;
 import cn.hutool.core.io.resource.ResourceUtil;
@@ -43,6 +44,9 @@ class DemoApplicationTests {
 	@Test
 	public void test() {
 
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start("生成SQL");
+
 		Context context = Context.enter();
 		LineNumberReader reader = null;
 
@@ -68,6 +72,7 @@ class DemoApplicationTests {
 			// 传递布尔值
 			ScriptableObject.putProperty(scope, "isOk", false);
 
+		
 			BufferedReader fileReader = ResourceUtil.getReader("static/sql.js", CharsetUtil.CHARSET_UTF_8);
 			reader = new LineNumberReader(fileReader);
 
@@ -82,14 +87,18 @@ class DemoApplicationTests {
 
 			Object result = null;
 	
-			result = context.evaluateString(scope, "selectArg([1,2]);", null, 1, null);
-			log.info(Context.toString(result));
+			// result = context.evaluateString(scope, "selectArg([1,2]);", null, 1, null);
+			// log.info(Context.toString(result));
 
-			result = context.evaluateString(scope, "selectArg();", null, 1, null);
-			log.info(Context.toString(result));
+			// result = context.evaluateString(scope, "selectArg();", null, 1, null);
+			// log.info(Context.toString(result));
 
 			result = context.evaluateString(scope, "select();", null, 1, null);
-			log.info(Context.toString(result));
+			// log.info(Context.toString(result));
+			stopWatch.stop();
+
+			log.info("共计" + stopWatch.getTotalTimeSeconds() + "秒");
+			log.info(stopWatch.prettyPrint());
 
 		} catch (Exception e) {
 			e.printStackTrace();
