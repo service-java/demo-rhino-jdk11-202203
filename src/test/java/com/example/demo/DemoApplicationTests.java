@@ -85,17 +85,18 @@ class DemoApplicationTests {
 
 			context.evaluateString(scope, sb.toString(), null, 1, null);
 
-			Object result = null;
+			
 	
-			// result = context.evaluateString(scope, "selectArg([1,2]);", null, 1, null);
-			// log.info(Context.toString(result));
-
-			// result = context.evaluateString(scope, "selectArg();", null, 1, null);
-			// log.info(Context.toString(result));
-
-			result = context.evaluateString(scope, "select();", null, 1, null);
+			for (int i = 0; i < 200; i++) {
+				// context.evaluateString(scope, "selectArg([1,2]);", null, 1, null);
+				// context.evaluateString(scope, "selectArg();", null, 1, null);
+				context.evaluateString(scope, "select();", null, 1, null);				
+			}
+			
 			// log.info(Context.toString(result));
 			stopWatch.stop();
+
+			// Object result = context.evaluateString(scope, "select();", null, 1, null);
 
 			log.info("共计" + stopWatch.getTotalTimeSeconds() + "秒");
 			log.info(stopWatch.prettyPrint());
