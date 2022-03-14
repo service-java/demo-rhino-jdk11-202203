@@ -1,12 +1,15 @@
 package com.example.demo;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.ResourceUtils;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.io.resource.Resource;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.CharsetUtil;
 import lombok.extern.java.Log;
 
@@ -52,14 +55,14 @@ class DemoApplicationTests {
 			Object jsObj = Context.javaToJS(students, scope);
 			ScriptableObject.putProperty(scope, "student", jsObj);
 			
-			// List<Integer> ids = new ArrayList<>();
-			// ids.add(1);
-			// ids.add(2);
+			
+			List<Integer> ids = new ArrayList<>();
+			ids.add(1);
+			ids.add(2);
+			// int[] ids = new int[]{1,2}; // 直接声明数组也是可以的
 
-
-			int[] ids = int[]{1,2};
 			// Object idsObj = Context.javaToJS(ids, scope);
-			ScriptableObject.putProperty(scope, "ids", ids);
+			ScriptableObject.putProperty(scope, "ids", ids.toArray());
 			// ScriptableObject.putProperty(scope, "ids", null);
 		
 			// 传递布尔值
