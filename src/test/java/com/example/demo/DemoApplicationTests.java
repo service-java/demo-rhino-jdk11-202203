@@ -52,13 +52,14 @@ class DemoApplicationTests {
 			Object jsObj = Context.javaToJS(students, scope);
 			ScriptableObject.putProperty(scope, "student", jsObj);
 			
-			List<Integer> ids = new ArrayList<>();
-			ids.add(1);
-			ids.add(2);
+			// List<Integer> ids = new ArrayList<>();
+			// ids.add(1);
+			// ids.add(2);
 
 
-			Object idsObj = Context.javaToJS(ids, scope);
-			ScriptableObject.putProperty(scope, "ids", idsObj);
+			int[] ids = int[]{1,2};
+			// Object idsObj = Context.javaToJS(ids, scope);
+			ScriptableObject.putProperty(scope, "ids", ids);
 			// ScriptableObject.putProperty(scope, "ids", null);
 		
 			// 传递布尔值
